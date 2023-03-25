@@ -7,7 +7,6 @@ import pathlib
 import unidecode
 import time
 import zipfile
-import logging
 from tenacity import *
 from datetime import datetime
 from openpyxl import Workbook
@@ -655,6 +654,8 @@ def main():
     li_tracking_id = read_tracking_id(input)
     shipper_folder = import_shipper_folder(drive, shipper_folder_id, input)
     report = running_redash(li_tracking_id, query_id, api_key)
+
+    # report = pd.read_csv('report.csv').head(20)
 
     report_shipper, report_full = merge_report(report, shipper_info, shipper_folder)
     report_dict = split_report(report_full)
